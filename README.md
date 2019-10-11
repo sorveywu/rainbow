@@ -2,7 +2,7 @@
 
 个人博客项目，点击访问[我的博客](https://www.sorvey.com)
 
-### 技术栈：[NestJS](https://nestjs.com/) + [postgresql](https://www.postgresql.org/) + [typeorm](https://typeorm.io)
+### 技术栈：[NestJS](https://nestjs.com/) + [Typescript](https://www.tslang.cn/index.html) + [postgresql](https://www.postgresql.org/) + [typeorm](https://typeorm.io)
 
 ## 已实现功能
 
