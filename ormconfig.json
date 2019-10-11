@@ -3,7 +3,7 @@
     "host": "localhost",
     "port": 5432,
     "username": "postgres",
-    "password": "dandan&&bianbian",
+    "password": "yourpassword",
     "database": "blog",
     "entities": [
         "dist/**/**.entity{.ts,.js}"
