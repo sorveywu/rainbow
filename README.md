@@ -2,7 +2,7 @@
 
 个人博客项目，点击访问[我的博客](https://www.sorvey.com)
 
-### 技术栈：NestJS + postgresql + typeorm
+### 技术栈：[NestJS](https://nestjs.com/) + [postgresql](https://www.postgresql.org/) + [typeorm](https://typeorm.io)
 
 ## 已实现功能
 
@@ -11,15 +11,17 @@
 - [x] 用户管理
 - [x] 文章分类及文章管理
 - [x] 文章标签管理
+- [x] 集成markdown编辑器+前端博客markdown渲染
+- [x] 图片上传
 - [x] 作品管理
 - [x] 文章检索
 - [x] 个人信息管理
 
 ## 待实现功能
 
-- [x] 菜单及资源权限管理
-- [x] 评论功能
-- [x] ...
+- [] 菜单及资源权限管理
+- [] 评论功能
+- [] ...
 
 ## 安装方法
 
