@@ -187,11 +187,13 @@ export class ProjectService {
         'project.description',
         'project.content',
         'project.sort',
+        'project.isQrcode',
         'project.onlineAt',
         'project.isTop',
       ])
       .orderBy({
         'type.sort': 'DESC',
+        'project.onlineAt': 'DESC',
         'project.id': 'ASC',
       })
       .getMany();

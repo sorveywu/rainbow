@@ -1,7 +1,7 @@
 import { Injectable, HttpException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Tag } from '../../common/entities/tag.entity';
-import { Repository } from 'typeorm';
+import { Repository, getRepository } from 'typeorm';
 
 @Injectable()
 export class TagService {
@@ -93,12 +93,47 @@ export class TagService {
   }
 
   /**
-   * 根据id查找tag
+   * 找tag下的所有文章
    * @param id 分类id
    */
   async findArticleOfTag(id: any): Promise<Tag> {
-    return await this.tagRep.findOne(id, {
+    const existing = await this.findOneById(id);
+    if (!existing) {
+      throw new HttpException(`ID 为 ${id} 的tag不存在`, 404);
+    }
+
+    try {
+      return await getRepository(Tag)
+      .createQueryBuilder('tag')
+      .leftJoinAndSelect('tag.articles', 'article')
+      .leftJoinAndSelect('article.category', 'category')
+      .leftJoinAndSelect('article.user', 'user')
+      .select([
+        'tag.id',
+        'tag.name',
+        'article.id',
+        'article.title',
+        'article.picture',
+        'article.description',
+        'article.views',
+        'article.onlineAt',
+        'category.id',
+        'category.name',
+        'user.id',
+        'user.nickname',
+      ])
+      .orderBy({
+        'article.onlineAt': 'DESC',
+        'article.id': 'DESC',
+      })
+      .where('tag.id = :id', {id})
+      .getOne();
+    } catch (err) {
+      throw new HttpException(err, 500);
+    }
+
+    /* return await this.tagRep.findOne(id, {
       relations: ['articles'],
-    });
+    }); */
   }
 }

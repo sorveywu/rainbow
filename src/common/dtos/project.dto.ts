@@ -48,6 +48,9 @@ export class ProjectDTO {
   @IsBoolean()
   isNew?: boolean = false;
 
+  @IsBoolean()
+  isQrcode?: boolean = false;
+
   // 排序
   @IsNumber()
   @Max(100, {

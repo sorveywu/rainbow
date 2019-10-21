@@ -50,6 +50,12 @@ export class Project extends BaseEntity {
   })
   isNew: boolean;
 
+  @Column({
+    comment: '是否展示二维码',
+    default: false,
+  })
+  isQrcode: boolean;
+
   // 排序
   @Column()
   sort: number;

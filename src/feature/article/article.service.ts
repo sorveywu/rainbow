@@ -5,7 +5,6 @@ import { Repository, getRepository } from 'typeorm';
 import { ArticleDTO } from '../../common/dtos/article.dto';
 import { CategoryService } from '../category/category.service';
 import { TagService } from '../tag/tag.service';
-import { Category } from '../../common/entities/category.entity';
 
 @Injectable()
 export class ArticleService {
@@ -217,12 +216,16 @@ export class ArticleService {
    * @param options 查询参数
    */
   async findByCate(options, cateId): Promise<any> {
+    const existing = await this.cateServ.findOneById({id: cateId});
+    if (!existing) {
+      throw new HttpException('文章分类不存在', 404);
+    }
     const pageSize = Number(options.pagesize) || 0;
     const page = Number(options.page) * pageSize || 0;
     try {
       const [list = [], count = 0] = await getRepository(Article)
         .createQueryBuilder('article')
-        .leftJoinAndSelect('article.user', 'u')
+        .leftJoinAndSelect('article.user', 'user')
         .leftJoinAndSelect('article.category', 'category')
         .select([
           'article.id',
@@ -235,6 +238,8 @@ export class ArticleService {
           'article.views',
           'category.id',
           'category.name',
+          'user.id',
+          'user.nickname',
         ])
         .where('category.id = :id', {id: cateId})
         .orderBy({
@@ -248,6 +253,8 @@ export class ArticleService {
       const totalPage = pageSize ? Math.ceil(count / pageSize) : 1;
 
       return {
+        cateId: existing.id,
+        cateName: existing.name,
         list,
         total: count,
         pageSize,
