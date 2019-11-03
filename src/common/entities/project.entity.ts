@@ -52,7 +52,7 @@ export class Project extends BaseEntity {
 
   @Column({
     comment: '是否展示二维码',
-    default: false,
+    default: true,
   })
   isQrcode: boolean;
 

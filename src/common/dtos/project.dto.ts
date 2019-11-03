@@ -49,7 +49,7 @@ export class ProjectDTO {
   isNew?: boolean = false;
 
   @IsBoolean()
-  isQrcode?: boolean = false;
+  isQrcode?: boolean = true;
 
   // 排序
   @IsNumber()

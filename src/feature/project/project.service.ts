@@ -35,8 +35,8 @@ export class ProjectService {
           'type.name',
         ])
         .orderBy({
-          'project.sort': 'ASC',
-          'project.id': 'ASC',
+          'project.sort': 'DESC',
+          'project.id': 'DESC',
         })
         .offset(page)
         .limit(pageSize)
@@ -136,6 +136,7 @@ export class ProjectService {
         'project.content',
         'project.onlineAt',
         'project.sort',
+        'project.isQrcode',
         'project.isTop',
         'type.id',
         'type.name',
@@ -166,7 +167,7 @@ export class ProjectService {
       ])
       .where('type.id = :id', {...id})
       .orderBy({
-        'project.sort': 'ASC',
+        'project.sort': 'DESC',
         'project.id': 'ASC',
       })
       .getOne();
@@ -193,6 +194,7 @@ export class ProjectService {
       ])
       .orderBy({
         'type.sort': 'DESC',
+        'project.sort': 'DESC',
         'project.onlineAt': 'DESC',
         'project.id': 'ASC',
       })
